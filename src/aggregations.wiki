@@ -1,3 +1,4 @@
+%template math
 == Aggregations ==
 A view declaration registers a query (not the result) under an identifier
 

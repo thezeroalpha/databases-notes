@@ -1,3 +1,4 @@
+%template math
 == Relational normal forms ==
 === Functional dependencies ===
 Functional dependencies are a generalization of keys. This theory defines when a relation is in normal form.
@@ -5,7 +6,7 @@ Functional dependencies are a generalization of keys. This theory defines when a
 functional dependency: if two rows agree on a value in one column, they must also agree on the other column
 e.g. here, functional dependency is `INAME → PHONE`, because phone number only depends on the instructor intuitively:
 
-{{file:img/fd-table-example.png|FD table example}}
+{{local:../img/fd-table-example.png|FD table example}}
 
 This is read as "`INAME` (functionally, uniquely) determines `PHONE`".
 
@@ -43,7 +44,7 @@ Checking whether a → β is implied by a functional dependency set:
 
 example:
 
-{{file:img/example-to-check-fd.png|Example to check functional dependency}}
+{{local:../img/example-to-check-fd.png|Example to check functional dependency}}
 
 ==== How to determine keys ====
 Determining a minimal key (slides 64-70)
@@ -113,7 +114,7 @@ First normal form (1NF):
         * or {A1,...,An} contains a key of R
     * in short, if for every non-trivial functional dependency, left-hand side contains a key
 
-    {{file:img/example-of-checking-bcnf.png|Example of checking BCNF}}
+    {{local:../img/example-of-checking-bcnf.png|Example of checking BCNF}}
 
 ===== Splitting relations =====
 If table R is not in BCNF, we can split it into two tables. You split based on violating FD.

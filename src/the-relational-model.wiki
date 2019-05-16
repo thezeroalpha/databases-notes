@@ -1,6 +1,7 @@
+%template math
 == The relational model ==
 === Concepts: schema, state ===
-{{file:img/database-schema-tree.png|Database schema tree}}
+{{local:../img/database-schema-tree.png|Database schema tree}}
 
 ==== Data types ====
 all table entries are data values that conform to some selection of data types.

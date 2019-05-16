@@ -1,3 +1,4 @@
+%template math
 == Joins ==
 Types:
     * `[INNER] JOIN`: usual join, eliminates tuples without a partner

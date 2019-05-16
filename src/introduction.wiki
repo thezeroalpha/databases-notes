@@ -1,3 +1,4 @@
+%template math
 == Introduction ==
 database: collection of data with
     * logical structure
@@ -29,7 +30,7 @@ constraints:
 
 create an entity relationship model in UML:
 
-{{file:img/entity-relationship-model.png|Entity relationship model}}
+{{local:../img/entity-relationship-model.png|Entity relationship model}}
 
 then translate that into relations
 

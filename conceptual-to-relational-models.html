@@ -1,0 +1,171 @@
+<html>
+<head>
+    <link rel="Stylesheet" type="text/css" href="style.css" />
+    <title>conceptual-to-relational-models</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" async src="https://cdn.jsdelivr.net/gh/mathjax/MathJax@2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<style type="text/css">
+nav a {
+    text-align: left;
+}
+nav #name {
+    text-align: right;
+    float: right;
+    font-style: italic;
+}
+</style>
+    <nav>
+    <a href="index.html">Index</a>
+    <span id="name">Alex Balgavy</span>
+    </nav>
+    <hr>
+    <div class="content">
+    
+<div id="Conceptual to relational models"><h2 id="Conceptual to relational models" class="header"><a href="#Conceptual to relational models">Conceptual to relational models</a></h2></div>
+<p>
+entity sets and relationship sets are represented as tables
+</p>
+<ul>
+<li>
+name of table is name of entity/relationship set
+
+<li>
+columns (unique names) usually correspond to attributes
+
+</ul>
+
+<p>
+a strong entity set becomes a table with columns for the attributes.
+</p>
+
+<p>
+a weak entity set becomes table with:
+</p>
+<ul>
+<li>
+columns for the attributes
+
+<li>
+columns for the primary keys of the identifying entity
+
+</ul>
+
+<p>
+many-to-many relationship set becomes table with:
+</p>
+<ul>
+<li>
+columns for attributes of relationship
+
+<li>
+columns for primary keys of participating entity sets
+
+</ul>
+
+<p>
+many-to-(zero or one) relations can be represented by adding extra attribute/column to the many-side with primary key of one-side
+</p>
+
+<p>
+for one-to-one relationship sets, either side can have the key of the other.
+</p>
+
+<p>
+if participation is partial (0..1), replacing table by an attribute will lead to null values for those that don't participate.
+</p>
+
+<p>
+if participation is total, foreign key should be <code>NOT NULL</code>.
+</p>
+
+<p>
+tables for relationship sets linking weak entity sets to identifying entity set can always be eliminated.o
+</p>
+
+<p>
+when translating sets to tables:
+</p>
+<ul>
+<li>
+every table should have a primary key
+
+<li>
+declared foreign key references for each relationship
+
+<li>
+declared whether foreign keys are nullable
+
+<li>
+declared unique if appropriate
+
+</ul>
+
+<p>
+composite attributes are flattened out by creating separate column for each component attribute.
+</p>
+
+<p>
+multi-valued attribute A of entity set E is represented by separate table with:
+</p>
+<ul>
+<li>
+columns for primary key of E
+
+<li>
+column for attribute value
+
+<li>
+each single value of multi-valued attributes gets its own row
+
+</ul>
+
+<p>
+Is-a to relational model:
+</p>
+<ul>
+<li>
+Method 1: hierarchy of tables
+
+<ul>
+<li>
+table for higher-level entity set
+
+<li>
+table for each lower-level entity set (includes primary key of higher-level entity set &amp; local attributes)
+
+</ul>
+<li>
+Method 2: many tables
+
+<ul>
+<li>
+form table for each entity set with all local &amp; inherited attributes
+
+<li>
+if specialisation is total, we don't need table for generalised entity - table for generalised entity can be defined as view containing union of specialisation tables
+
+</ul>
+<li>
+Method 3: one table with null values
+
+<ul>
+<li>
+form a single table with all local and specialized attributes
+
+</ul>
+</ul>
+
+<p>
+recursive association: translates to foreign key that refers to the same table
+</p>
+<ul>
+<li>
+requires separate table with two foreign keys to parent table
+
+</ul>
+
+    </div>
+</body>
+</html>

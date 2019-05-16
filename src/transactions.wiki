@@ -1,3 +1,4 @@
+%template math
 == Transactions ==
 transaction: a sequence of actions we want to perform on a database
 
@@ -154,7 +155,7 @@ SQL-92 levels:
     * `repeatable read`: strict 2PL, a transaction may read phantom rows if it runs an aggregation query twice
     * `serializable`: strict 2PL, multi-granularity locking. no phantom rows.
 
-{{file:img/sql-92-isolation-levels.png|SQL-92 isolation levels}}
+{{local:../img/sql-92-isolation-levels.png|SQL-92 isolation levels}}
 
 phantom row problem: T1 locks all rows, but T2 inserts new row that isn't locked.
 

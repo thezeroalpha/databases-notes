@@ -1,3 +1,4 @@
+%template math
 == Database design: Conceptual models ==
 Three phases:
 * conceptual:
@@ -13,7 +14,7 @@ Three phases:
     * try to maximise performance of the final system
 
 === Conceptual models: Entity-Relationship & UML ===
-{{file:img/er-diagram.png|ER diagram}}
+{{local:../img/er-diagram.png|ER diagram}}
 
 static, models the structure and not operations. no methods or functions.
 
@@ -59,7 +60,7 @@ a relationship set is a set of relationship of same kind. i.e. a set of tuples (
 
 example in UML with a relationship set _plays-in_ and role indicators:
 
-{{file:img/relationship-set-example.png|Relationship set example}}
+{{local:../img/relationship-set-example.png|Relationship set example}}
 
 cardinality limits express number of entities to which another entity can be associated via relationship set:
 * 0...1 means zero or one
@@ -78,7 +79,7 @@ degree of a relationship set is number of entity sets participating in the relat
 ==== Is-a (inheritance) ====
 lower-level entity sets are subgroups of the higher-level entity sets (e.g. an employee 'is a' person)
 
-{{file:img/is-a-example.png|Is a example}}
+{{local:../img/is-a-example.png|Is a example}}
 
 lower-level entity sets inherit all attributes and relationships of the higher-level entity sets
 
@@ -93,8 +94,8 @@ constraints:
 treat relationship set as an abstract entity. allows relations between relations.
 
 ==== Summary ====
-{{file:img/er-symbols-1.png|ER symbols 1}}
-{{file:img/er-symbols-2.png|ER symbols 2}}
+{{local:../img/er-symbols-1.png|ER symbols 1}}
+{{local:../img/er-symbols-2.png|ER symbols 2}}
 
 
 === UML vs ER ===

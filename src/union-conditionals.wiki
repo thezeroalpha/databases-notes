@@ -1,3 +1,4 @@
+%template math
 == Union, conditionals ==
 `UNION` combines results of two queries. there's no other way to make one result column to draw from different tables/columns.
 subqueries must return tables with same number of columns and compatible data types.

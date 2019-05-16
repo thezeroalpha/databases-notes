@@ -1,0 +1,184 @@
+<html>
+<head>
+    <link rel="Stylesheet" type="text/css" href="style.css" />
+    <title>sql-overview</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" async src="https://cdn.jsdelivr.net/gh/mathjax/MathJax@2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<style type="text/css">
+nav a {
+    text-align: left;
+}
+nav #name {
+    text-align: right;
+    float: right;
+    font-style: italic;
+}
+</style>
+    <nav>
+    <a href="index.html">Index</a>
+    <span id="name">Alex Balgavy</span>
+    </nav>
+    <hr>
+    <div class="content">
+    
+<div id="SQL Overview"><h2 id="SQL Overview" class="header"><a href="#SQL Overview">SQL Overview</a></h2></div>
+<div id="SQL Overview-Basics"><h3 id="Basics" class="header"><a href="#SQL Overview-Basics">Basics</a></h3></div>
+<p>
+Basic query: <code>SELECT columns FROM table WHERE condition is true</code>
+</p>
+
+<p>
+The <code>FROM</code> clause is like declaring variables that range over tuples of a relation:
+</p>
+
+<pre SQL>
+SELECT  E.ENO, E.TOPIC  -- choose columns ENO, TOPIC
+FROM    EXERCISES E     -- table exercises, E being an 'alias' for the current row
+WHERE   E.CAT = 'H'     -- where the column CAT contains the value 'H'
+</pre>
+
+<p>
+If name of tuple variable ('E' in the code above) is not given explicitly, the variable will have the name of the relation ('EXERCISES' in the code above).
+</p>
+
+<p>
+A reference to attribute A of variable R may be written as <code>A</code> if R is <em>the only tuple variable</em> with an attribute named A.
+</p>
+
+<p>
+It is almost always an error if there are two tuple variables that aren't linked via join conditions.
+</p>
+
+<p>
+Don't join more tables than needed.
+</p>
+
+<p>
+In some scenarios, we might have to consider more than one tuple of the same relation to get a result tuple.
+</p>
+
+<p>
+Duplicates have to be explicitly eliminated, using <code>DISTINCT</code>.
+</p>
+
+<p>
+Sufficient condition for superfluous DISTINCT, where K is set of attributes uniquely determined by result.
+</p>
+<ol>
+<li>
+Assume WHERE clause is a conjunction. Let K be the set of attributes in the SELECT clause.
+
+<li>
+Add to K attributes A s.t.:
+
+<ul>
+<li>
+A = c for a constant c is in the WHERE clause
+
+<li>
+A = B for B ∈ K is in the WHERE clause
+
+<li>
+if K contains key of a tuple variable, add all attributes of that variable
+
+</ul>
+<li>
+Repeat 2 until K is stable.
+
+<li>
+If K contains a key of every tuple variable listed under <code>FROM</code>, then <code>DISTINCT</code> is superfluous.
+
+</ol>
+
+<p>
+Typical mistakes:
+</p>
+<ul>
+<li>
+missing join conditions
+
+<li>
+unnecessary joins (may slow down query)
+
+<li>
+self joins with incorrect treatment of multiple tuple variables over same relation, missing conditions
+
+<li>
+unexpected duplicates
+
+<li>
+unnecessary <code>DISTINCT</code>
+
+</ul>
+
+<div id="SQL Overview-Subqueries &amp; non-monotonic constructs"><h3 id="Subqueries &amp; non-monotonic constructs" class="header"><a href="#SQL Overview-Subqueries &amp; non-monotonic constructs">Subqueries &amp; non-monotonic constructs</a></h3></div>
+<p>
+monotonic: if further rows get inserted, the queries yield a superset of rows
+</p>
+
+<p>
+non-monotonic: 'there is no', 'does not exist', 'for all', 'min/max'. testing whether or not a query yields an empty result.
+</p>
+
+<p>
+example to select students without any homework result:
+</p>
+
+<pre SQL>
+SELECT  FIRST, LAST
+FROM    STUDENTS
+WHERE   SID NOT IN (SELECT  SID
+                    FROM    RESULTS
+                    WHERE   CAT = 'H')
+</pre>
+
+<p>
+conceptually, the subquery (<code>SELECT SID...</code>) is evaluated before main query.
+</p>
+
+<p>
+constructs:
+</p>
+<ul>
+<li>
+<code>NOT IN</code>: something is not in result of subquery
+
+<li>
+<code>NOT EXISTS</code>: result of subquery is empty
+
+<li>
+"For all":
+
+<ul>
+<li>
+no universal quantifier in SQL, but you can use <code>EXISTS</code>. In logic, <code>∀X(φ) ↔ ¬∃ X (¬ φ)</code>.
+
+<li>
+common pattern is <code>∀X (φ₁ → φ₂)</code> becomes <code>¬∃ X (φ₁ ∧ ¬ φ₂)</code>
+
+</ul>
+</ul>
+
+<p>
+Comparing values:
+</p>
+<ul>
+<li>
+<code>ALL</code>: compare with all values in a set, has to be true for all
+
+<li>
+<code>ANY</code>/<code>SOME</code>: has to be true for at least some values in a set (also, <code>x IN s</code> == <code>x = ANY s</code>)
+
+<li>
+for both, subquery has to return a single column
+
+<li>
+comparisons with subquery results (<code>POINTS = (SELECT ...)</code>) must return a single row
+
+</ul>
+
+    </div>
+</body>
+</html>

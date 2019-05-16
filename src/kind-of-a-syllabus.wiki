@@ -1,3 +1,4 @@
+%template math
 == Kind of a syllabus ==
 Here's what you should be able to do for each chapter (directly from slides).
 

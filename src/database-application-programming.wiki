@@ -1,7 +1,8 @@
+%template math
 == Database Application Programming ==
 Various ways of using database tech:
 
-{{file:img/using-database-tech.png|Using database tech}}
+{{local:../img/using-database-tech.png|Using database tech}}
 
 how to access database from apps:
   * static embedded queries:
@@ -20,7 +21,7 @@ provides APIs like `getInt(string)`, `getString(string)` to fetch cols by name. 
 
 matches approx. SQL types to Java types, not always precise (String vs VARCHAR(20))
 
-{{file:img/sql-types-to-java.png|SQL types to Java}}
+{{local:../img/sql-types-to-java.png|SQL types to Java}}
 
 to improve performance of JDBC apps:
   * connection pooling: keep database connection open, reduces latency
@@ -81,7 +82,7 @@ maps rows in tables to objects:
 
 mapping from objects to database (automatic/designed). run-time library handles interaction with database.
 
-{{file:img/jpa-orm-example.png|JPA ORM example}}
+{{local:../img/jpa-orm-example.png|JPA ORM example}}
 
 but you might end up being inefficient and doing a huge amount of stuff in Java that you could just do in SQL and have the DBMS optimise it for you.
 

@@ -1,0 +1,621 @@
+<html>
+<head>
+    <link rel="Stylesheet" type="text/css" href="style.css" />
+    <title>relational-normal-forms</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" async src="https://cdn.jsdelivr.net/gh/mathjax/MathJax@2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<style type="text/css">
+nav a {
+    text-align: left;
+}
+nav #name {
+    text-align: right;
+    float: right;
+    font-style: italic;
+}
+</style>
+    <nav>
+    <a href="index.html">Index</a>
+    <span id="name">Alex Balgavy</span>
+    </nav>
+    <hr>
+    <div class="content">
+    
+<div id="Relational normal forms"><h2 id="Relational normal forms" class="header"><a href="#Relational normal forms">Relational normal forms</a></h2></div>
+<div id="Relational normal forms-Functional dependencies"><h3 id="Functional dependencies" class="header"><a href="#Relational normal forms-Functional dependencies">Functional dependencies</a></h3></div>
+<p>
+Functional dependencies are a generalization of keys. This theory defines when a relation is in normal form.
+</p>
+
+<p>
+functional dependency: if two rows agree on a value in one column, they must also agree on the other column
+e.g. here, functional dependency is <code>INAME → PHONE</code>, because phone number only depends on the instructor intuitively:
+</p>
+
+<p>
+<img src="img/fd-table-example.png" alt="FD table example" />
+</p>
+
+<p>
+This is read as "<code>INAME</code> (functionally, uniquely) determines <code>PHONE</code>".
+</p>
+
+<div id="Relational normal forms-Functional dependencies-What is a functional dependency?"><h4 id="What is a functional dependency?" class="header"><a href="#Relational normal forms-Functional dependencies-What is a functional dependency?">What is a functional dependency?</a></h4></div>
+<ul>
+<li>
+like partial key, because it uniquely determines some attributes but not all
+
+<li>
+a constraint
+
+<li>
+A determinant is a 'minimal' functional dependency.
+
+<li>
+goal of database normalization is to turn functional dependencies into keys
+
+</ul>
+
+<p>
+Keys are functional dependencies.
+</p>
+
+<p>
+During database design, only unquestionable conditions should be used as functional dependencies.
+</p>
+
+<p>
+It's usually bad database design if schema's relations violate normal form. If it's violated, data is stored redundantly and information about different concepts is intermixed.
+</p>
+
+<div id="Relational normal forms-Functional dependencies-Working with functional dependencies"><h4 id="Working with functional dependencies" class="header"><a href="#Relational normal forms-Functional dependencies-Working with functional dependencies">Working with functional dependencies</a></h4></div>
+<p>
+The database designer is not interested in all functional dependencies, but only in a representative functional dependency set that implies all others.
+</p>
+
+<p>
+Implications of functional dependencies:
+</p>
+<ul>
+<li>
+If A→B and B→C, then A→C
+
+<li>
+A→A always holds
+
+<li>
+Armstrong axioms:
+
+<ul>
+<li>
+If β ⊆ α, then α → β (reflexivity)
+
+<li>
+If α → β, then α ∪ γ → β ∪ γ (augmentation)
+
+<li>
+If α → β and β → γ, then α → γ (transitivity)
+
+</ul>
+</ul>
+
+<p>
+Computing the cover: for given set of attributes, see which they imply through FDs. Extended cover with those, and repeat.
+</p>
+<ul>
+<li>
+Cover of A ({A}+)? FDs A→B,C; B→E
+
+<ul>
+<li>
+{A}+ ⇒ {A,B,C} ⇒ {A,B,C,E}
+
+</ul>
+</ul>
+
+<p>
+Checking whether a → β is implied by a functional dependency set:
+</p>
+<ol>
+<li>
+computer cover α⁺ of α:
+
+<li>
+check if β ⊆ α⁺:
+
+<ul>
+<li>
+set of functional dependencies F implies α → β iff β ⊆ α⁺_F
+
+</ul>
+</ol>
+
+<p>
+example:
+</p>
+
+<p>
+<img src="img/example-to-check-fd.png" alt="Example to check functional dependency" />
+</p>
+
+<div id="Relational normal forms-Functional dependencies-How to determine keys"><h4 id="How to determine keys" class="header"><a href="#Relational normal forms-Functional dependencies-How to determine keys">How to determine keys</a></h4></div>
+<p>
+Determining a minimal key (slides 64-70)
+</p>
+<ul>
+<li>
+given:
+
+<ul>
+<li>
+R(A,B,C,D)
+
+<li>
+FDs: A→C; C→B,D
+
+</ul>
+<li>
+start with all attributes: {A,B,C,D}
+
+<li>
+For every attribute, see if we can remove it, which is possible if they are implied by an FD which is still in the attribute set.
+
+<ul>
+<li>
+{A,B,C,D} ⇒ {A,C} (FD2) ⇒ {A} (FD1)
+
+<li>
+thus {A} is a minimal key
+
+<li>
+order matters, you can end up with different keys!
+
+</ul>
+</ul>
+
+<p>
+determining all minimal keys (slides 71-88)
+</p>
+<ul>
+<li>
+given:
+
+<ul>
+<li>
+R(A,B,C,D)
+
+<li>
+FDs: A→C; C→B,D
+
+</ul>
+<li>
+Start with set of candidates: attributes that imply and are not implied (not in any right hand side)
+
+<ul>
+<li>
+{ {A} }
+
+</ul>
+<li>
+Find cover of smallest candidate key
+
+<ul>
+<li>
+{A} ⇒ {A,C} ⇒ {A,B,C,D}
+
+</ul>
+<li>
+If does not contain all attributes, extend candidate with missing others and repeat.
+
+<li>
+edge case: if there are no attributes that aren't in any right hand side, then candidates is empty set { {} } and you extend with every attribute like { {A}, {B}, ...}
+
+</ul>
+
+<div id="Relational normal forms-Functional dependencies-Determinants"><h4 id="Determinants" class="header"><a href="#Relational normal forms-Functional dependencies-Determinants">Determinants</a></h4></div>
+<p>
+determinant: non-trivial, minimal functional dependency
+</p>
+
+<p>
+{A1, ..., An} is determinant for {B1, ..., Bm} if:
+</p>
+<ul>
+<li>
+functional dependency A1, ..., An → B1, ..., Bm holds; and
+
+<li>
+left-hand side is minimal (if any Ai is removed, then it does not hold); and
+
+<li>
+it is non-trivial, i.e. {B1, ..., Bm} not subset of {A1, ..., An}
+
+</ul>
+
+<div id="Relational normal forms-Functional dependencies-Consequences of bad database design"><h4 id="Consequences of bad database design" class="header"><a href="#Relational normal forms-Functional dependencies-Consequences of bad database design">Consequences of bad database design</a></h4></div>
+<p>
+usually if table contains an functional dependency that's not implied by a key, it's a sign of bad database design.
+</p>
+
+<p>
+leads to:
+</p>
+<ul>
+<li>
+redundant storage of certain facts
+
+<ul>
+<li>
+wastes storage space
+
+<li>
+hard to ensure integrity when updating, as all redundant copies need to be updated, wasting time
+
+<li>
+requires additional constraints to guarantee integrity
+
+</ul>
+<li>
+insert, update, deletion anomalies
+
+<ul>
+<li>
+update: when a single value needs to be changed, multiple tuples need to be updated, taking longer and maybe getting out of sync
+
+<li>
+insertion: when unrelated concepts are stored together in a single table
+
+<li>
+deletion: e.g. when last course of instructor is deleted, their phone number is lost
+
+</ul>
+</ul>
+
+<p>
+problem is that general FDs are not supported by relational databases. so you have to transform them into key constraints (database normalisation).
+</p>
+
+<div id="Relational normal forms-Normal forms"><h3 id="Normal forms" class="header"><a href="#Relational normal forms-Normal forms">Normal forms</a></h3></div>
+<p>
+Normal form types:
+</p>
+<ul>
+<li>
+Third Normal Form (3NF): standard relational normal form used in practice
+
+<li>
+Boyce-Codd Normal Form (BCNF):
+
+<ul>
+<li>
+a bit more restrictive, easier to define, better for intuition
+
+<li>
+BCNF requires that all functional dependencies are keys.
+
+<li>
+ensures that key constraints automatically satisfy all FDs, so no more constraints are needed
+
+<li>
+anomalies (update/insertion/deletion) don't occur
+
+</ul>
+</ul>
+
+<p>
+Normalisation algorithms can construct good relation schemas from attributes and functional dependencies. When an ER model is well designed, resulting derived relational tables will automatically be in BCNF.
+</p>
+
+<p>
+First normal form (1NF):
+</p>
+<ul>
+<li>
+requires all table entries are atomic (not lists, sets, records, or relations)
+
+<li>
+all further normal forms assume that tables are in 1NF
+
+</ul>
+
+<div id="Relational normal forms-Normal forms-Boyce-Codd Normal Form (BCNF)"><h4 id="Boyce-Codd Normal Form (BCNF)" class="header"><a href="#Relational normal forms-Normal forms-Boyce-Codd Normal Form (BCNF)">Boyce-Codd Normal Form (BCNF)</a></h4></div>
+<ul>
+<li>
+if all of its FDs are implied by its key constraints
+
+<li>
+in symbols:
+
+<ul>
+<li>
+for every FD A1,...,An → B1,...,Bm of R, we have
+
+<li>
+either {B1,...,Bm} ⊆ {A1,...,An} (the FD is trivial)
+
+<li>
+or {A1,...,An} contains a key of R
+
+</ul>
+<li>
+in short, if for every non-trivial functional dependency, left-hand side contains a key
+
+</ul>
+<blockquote>
+<img src="img/example-of-checking-bcnf.png" alt="Example of checking BCNF" />
+</blockquote>
+
+<div id="Relational normal forms-Normal forms-Boyce-Codd Normal Form (BCNF)-Splitting relations"><h5 id="Splitting relations" class="header"><a href="#Relational normal forms-Normal forms-Boyce-Codd Normal Form (BCNF)-Splitting relations">Splitting relations</a></h5></div>
+<p>
+If table R is not in BCNF, we can split it into two tables. You split based on violating FD.
+</p>
+
+<p>
+Table decomposition:
+</p>
+<ul>
+<li>
+if FD A1,...,An → B1,...,Bm violates BCNF:
+
+<ol>
+<li>
+create new relation S(A1,...,An,B1,...,Bm)
+
+<li>
+and remove B1,...,Bm from original relation R
+
+</ol>
+</ul>
+
+<p>
+Splitting has to be <span id="Relational normal forms-Normal forms-Boyce-Codd Normal Form (BCNF)-Splitting relations-lossless"></span><strong id="lossless">lossless</strong> so that you can reconstruct original relation by a join.
+</p>
+
+<p>
+Decomposition theorem: split is guaranteed to be lossless if intersection of attributes of new tables is a key of at least one of them.
+</p>
+
+<p>
+It's always possible to transform relation into BCNF by lossless splitting. The resulting schema can always represent all previously possible states, but it may be more general and allow states that do not exist in the old schema.
+</p>
+
+<p>
+With computable columns, splitting the relation is not the right solution - instead, define a view with the computed column.
+</p>
+
+<p>
+A good decomposition should guarantee preservation of FDs:
+</p>
+<ul>
+<li>
+and FD can refer only to attributes of a single relation
+
+<li>
+when splitting relation into two, there might be FDs that can't be expressed anymore (not preserved)
+
+</ul>
+
+<div id="Relational normal forms-Normal forms-Boyce-Codd Normal Form (BCNF)-Synthesis"><h5 id="Synthesis" class="header"><a href="#Relational normal forms-Normal forms-Boyce-Codd Normal Form (BCNF)-Synthesis">Synthesis</a></h5></div>
+<p>
+Determining canonical (minimal) set of FDs:
+</p>
+<ul>
+<li>
+given:
+
+<ul>
+<li>
+R(A,B,C,D,E)
+
+<li>
+FDs: D→A; E→A,D; C,D→A; A,E→C; B→A,D,E
+
+</ul>
+<li>
+Rewrite every FD as singular:
+
+<ul>
+<li>
+D→A, E→A, E→D, C,D→A, A,E→C, B→A, B→D, B→E
+
+</ul>
+<li>
+Minimise left hand side of every FD (aka is every FD minimal?)
+
+<ul>
+<li>
+drop C from C,D→A because D→A
+
+<li>
+drop A from A,E→C because E→A
+
+<li>
+so: D→A, E→A, E→D, D→A, E→C, B→A, B→D, B→E
+
+</ul>
+<li>
+Remove implied FDs (and trivial/duplicate) using lhs attributes (aka if we can determine rhs without the FD itself)
+
+<ul>
+<li>
+D→A, E→D, E→C, B→E
+
+</ul>
+</ul>
+
+<p>
+BCNF synthesis (relation R, set of FDs for R):
+</p>
+<ol>
+<li>
+Determine canonical set of FDs
+
+<ul>
+<li>
+e.g. D→A, E→D, E→C, B→E
+
+</ul>
+<li>
+Maximise rhs of FDs
+
+<ul>
+<li>
+{D}+ - D = {A}
+
+<li>
+\({E}_{-E}^+\) = {D,C,A}
+
+<li>
+\({B}_{-B}^+\) = {E,D,C,A}  ({B} is the minimal key in this case)
+
+</ul>
+<li>
+Split on violating FDs. For each FD, remove the rhs from relations and add a new relation, with the lhs of that FD being the key.
+
+</ol>
+
+<div id="Relational normal forms-Normal forms-Third normal form (3NF)"><h4 id="Third normal form (3NF)" class="header"><a href="#Relational normal forms-Normal forms-Third normal form (3NF)">Third normal form (3NF)</a></h4></div>
+<ul>
+<li>
+relation is in 3NF if for every non-trivial functional dependency:
+
+<ul>
+<li>
+left-hand side contains a key
+
+<li>
+or right-hand side is attribute of minimal key
+
+</ul>
+</ul>
+
+<p>
+retains all FDs, so more popular than BCNF. If we leave table in 3NF, we have non-key constraints - the FDs that are not implied by keys.
+</p>
+
+<div id="Relational normal forms-Normal forms-Third normal form (3NF)-Synthesis"><h5 id="Synthesis" class="header"><a href="#Relational normal forms-Normal forms-Third normal form (3NF)-Synthesis">Synthesis</a></h5></div>
+<p>
+Produces lossless decomposition of relation into 3NF that preserves FDs.
+</p>
+
+<ol>
+<li>
+Determine canonical set of FDs
+
+<ul>
+<li>
+e.g. D→A, E→D, E→C, B→E
+
+</ul>
+<li>
+Merge FDs with same lhs and create relations from them
+
+<ul>
+<li>
+R1(<u>D</u>, A)
+
+<li>
+R2(<u>E</u>,C,D)
+
+<li>
+R3(<u>B</u>,E)
+
+</ul>
+<li>
+Check if any of relations has key of original relation. If not, create a new relation with attributes of the minimal key.
+
+<ul>
+<li>
+In this case, R(A,<u>B</u>,C,D,E); R3 has <u>B</u>, so don't need to do anything.
+
+</ul>
+<li>
+For all pairs of created relations: are they contained in another relation? If yes, remove.
+
+</ol>
+
+<div id="Relational normal forms-MVD &amp; 4NF"><h3 id="MVD &amp; 4NF" class="header"><a href="#Relational normal forms-MVD &amp; 4NF">MVD &amp; 4NF</a></h3></div>
+<div id="Relational normal forms-MVD &amp; 4NF-Multivalued dependencies (MVDs)"><h4 id="Multivalued dependencies (MVDs)" class="header"><a href="#Relational normal forms-MVD &amp; 4NF-Multivalued dependencies (MVDs)">Multivalued dependencies (MVDs)</a></h4></div>
+<p>
+Constraints that give a necessary and sufficient condition for lossless decomposition. They lead to fourth normal form (4NF).
+</p>
+
+<p>
+Multivalued dependency <code>NAME ⤅ PROG_LANG</code> means that set of vales in in column PROG_LANG associated with every NAME is independent of all other columns. i.e. there's an embedded function from NAME to sets of PROG_LANG
+</p>
+
+<p>
+The MVD holds if, whenever two tuples agree on NAME, one can exchange their PROG_LANG values and the resulting tuples are in the same table.
+</p>
+
+<p>
+MVDs always come in pairs. For relation R(A1,...,An, B1,...,Bm, C1,...,Ck) these multivalued dependencies are equivalent:
+</p>
+<ul>
+<li>
+A1,...,An ⤅ B1,...,Bm
+
+<li>
+A1,...,An ⤅ C1,...,Ck
+
+</ul>
+
+<p>
+Every FD is also a MVD.
+</p>
+
+<div id="Relational normal forms-MVD &amp; 4NF-Fourth Normal Form (4NF)"><h4 id="Fourth Normal Form (4NF)" class="header"><a href="#Relational normal forms-MVD &amp; 4NF-Fourth Normal Form (4NF)">Fourth Normal Form (4NF)</a></h4></div>
+<p>
+A relation is in in 4NF if every MVD A1,...,An ⤅ B1,...,Bm is either trivial, or implied by a key.
+</p>
+
+<p>
+If a relation is in 4NF, it's also automatically in BCNF.
+</p>
+
+<div id="Relational normal forms-Normal forms &amp; ER design"><h3 id="Normal forms &amp; ER design" class="header"><a href="#Relational normal forms-Normal forms &amp; ER design">Normal forms &amp; ER design</a></h3></div>
+<p>
+If a 'good' ER schema is transformed into the relational model, the result will satisfy all normal forms (4NF, BCNF, 3NF). If a normal form is violated, there's a flaw in the input ER schema.
+</p>
+
+<p>
+In the ER model, the entity has to be split in case of a violation.
+</p>
+
+<p>
+Violations of BCNF can also be due to wrong placement of an attribute.
+</p>
+
+<p>
+If an attribute of a ternary relationship only depends on two of the entities, it's a BCNF violation.
+</p>
+
+<p>
+Why normalize?
+</p>
+<ul>
+<li>
+Avoid redundancy
+
+<li>
+Store separate facts separately
+
+<li>
+Transform general integrity constraints into keys (DBMS constraints)
+
+</ul>
+
+<div id="Relational normal forms-Denormalization"><h3 id="Denormalization" class="header"><a href="#Relational normal forms-Denormalization">Denormalization</a></h3></div>
+<p>
+The process of adding redundant columns to the database to improve performance.
+</p>
+
+<p>
+This leads to the reintroduction of (some) anomalies, but you avoid huge amounts of joins.
+</p>
+
+    </div>
+</body>
+</html>

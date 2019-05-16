@@ -1,0 +1,293 @@
+<html>
+<head>
+    <link rel="Stylesheet" type="text/css" href="style.css" />
+    <title>kind-of-a-syllabus</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" async src="https://cdn.jsdelivr.net/gh/mathjax/MathJax@2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<style type="text/css">
+nav a {
+    text-align: left;
+}
+nav #name {
+    text-align: right;
+    float: right;
+    font-style: italic;
+}
+</style>
+    <nav>
+    <a href="index.html">Index</a>
+    <span id="name">Alex Balgavy</span>
+    </nav>
+    <hr>
+    <div class="content">
+    
+<div id="Kind of a syllabus"><h2 id="Kind of a syllabus" class="header"><a href="#Kind of a syllabus">Kind of a syllabus</a></h2></div>
+<p>
+Here's what you should be able to do for each chapter (directly from slides).
+</p>
+
+<p>
+Data modelling
+</p>
+<ul>
+<li>
+three phases of database design: conceptual, logical, physical
+
+<li>
+basic E/R concepts
+
+<ul>
+<li>
+entities, attributes, relationships, 'is a', weak entity sets, aggregation
+
+<li>
+cardinality/participation constraints
+
+</ul>
+<li>
+how UML corresponds with and differs from E/R
+
+<ul>
+<li>
+differences: basic syntax, aggregation, key specifications
+
+</ul>
+<li>
+how to make a conceptual model given a scenario (UML and ER)
+
+</ul>
+
+<p>
+Conceptual to relational model
+</p>
+<ul>
+<li>
+how to translate a conceptual model to a relational model
+
+<ul>
+<li>
+identifying keys
+
+<li>
+internal/external keys
+
+<li>
+(foreign) key constraints
+
+<li>
+multi-valued attributes
+
+<li>
+weak entity sets vs. composition
+
+<li>
+'is a'
+
+<li>
+representing cardinalities
+
+<li>
+recursive relationships
+
+<li>
+optimisation: removing relationship tables
+
+</ul>
+</ul>
+
+<p>
+Relational model:
+</p>
+<ul>
+<li>
+explain concepts of relational model:
+
+<ul>
+<li>
+schemas, state, domains
+
+<li>
+read various notations for relational schema
+
+</ul>
+<li>
+explain applications and problems of null values
+
+<li>
+explain integrity constraints and their importance
+
+<li>
+explain meaning of keys and foreign keys
+
+<li>
+develop simple relational schemas
+
+</ul>
+
+<p>
+SQL:
+</p>
+<ul>
+<li>
+write advanced SQL queries (nested, multiple variables)
+
+<li>
+aggregation, grouping, union
+
+<li>
+be comfortable with various join variants
+
+<li>
+evaluated correctness and equivalence of SQL queries (including possible presence of duplicate result tuples)
+
+</ul>
+
+<p>
+Relational normal forms:
+</p>
+<ul>
+<li>
+work with functional dependencies:
+
+<ul>
+<li>
+define what they are
+
+<li>
+detect them in database schemas
+
+<li>
+decide implication, determine keys
+
+</ul>
+<li>
+explain insert, update, delete anomalies
+
+<li>
+understand, explain, and use BCNF
+
+<ul>
+<li>
+test a given relation for BCNF
+
+<li>
+transform a relation into BCNF
+
+</ul>
+<li>
+understand, explain, and use 3NF
+
+<ul>
+<li>
+test a given relation for 3NF
+
+<li>
+transform a relation into 3NF
+
+</ul>
+<li>
+understand, explain MVDs and 4NF
+
+<li>
+detect normal form violations on the level of ER
+
+<li>
+explain when and how to denormalise a database schema
+
+<li>
+probably on exam:
+
+<ul>
+<li>
+compute cover {attribute}+ -- needed everywhere
+
+<li>
+determine all minimal keys
+
+<li>
+find 'canonical' (minimal) set of FDs:
+
+<ul>
+<li>
+use for BCNF decomposition -- splitting
+
+<li>
+3NF synthesis algorithm
+
+</ul>
+<li>
+definitions of 4NF and multivalued FDs
+
+</ul>
+</ul>
+
+<p>
+Transactions:
+</p>
+<ul>
+<li>
+ACID properties, transactions
+
+<li>
+anomalies: lost update, dirty read, unrepeatable read, phantoms
+
+<li>
+transaction schedules, serializability, conflicts (rw/wr/ww)
+
+<li>
+conflict equivalent, conflict serializability
+
+<li>
+lock based concurrency control: 2 PL (strict, preclaiming)
+
+<li>
+cascading rollbacks, deadlocks, deadlock detection
+
+<li>
+cascadeless, recoverable
+
+<li>
+granularity of locking, intention locks
+
+<li>
+SQL isolation levels: <code>READ UNCOMMITTED</code>, <code>READ COMMITTED</code>, <code>READ STBILITY</code>, <code>SERIALIZABLE</code>
+
+<li>
+optimistic concurrency approach
+
+<li>
+multiversion concurrency control, snapshot isolation
+
+</ul>
+
+<p>
+Database APIs:
+</p>
+<ul>
+<li>
+explain problem of impedance mismatch
+
+<li>
+be able to classify database app interfaces: static, dynamic, object-relational mapping
+
+<li>
+discuss advantages/disadvantages of API in terms of object navigation and complex query execution
+
+<li>
+understand object-relational mappings: Hibernate for Java, entity framework for .NET (but you don't have to program on the exam)
+
+<ul>
+<li>
+relate these to the ANSI SPARC 3-layer model and concepts of logical/physical data independence
+
+</ul>
+<li>
+explain advantages of LinQ and how it relates to impedance mismatch
+
+</ul>
+
+    </div>
+</body>
+</html>

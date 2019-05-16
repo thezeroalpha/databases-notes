@@ -1,3 +1,4 @@
+%template math
 == SQL Overview ==
 === Basics ===
 Basic query: `SELECT columns FROM table WHERE condition is true`

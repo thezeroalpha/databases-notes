@@ -1,3 +1,4 @@
+%template math
 == Order by ==
 `ORDER BY` allows list of sorting criteria.
 Can specify multiple attribute names:

@@ -1,3 +1,4 @@
+%template math
 == Conceptual to relational models ==
 entity sets and relationship sets are represented as tables
     - name of table is name of entity/relationship set

@@ -1,0 +1,62 @@
+<html>
+<head>
+    <link rel="Stylesheet" type="text/css" href="style.css" />
+    <title>union-conditionals</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" async src="https://cdn.jsdelivr.net/gh/mathjax/MathJax@2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<style type="text/css">
+nav a {
+    text-align: left;
+}
+nav #name {
+    text-align: right;
+    float: right;
+    font-style: italic;
+}
+</style>
+    <nav>
+    <a href="index.html">Index</a>
+    <span id="name">Alex Balgavy</span>
+    </nav>
+    <hr>
+    <div class="content">
+    
+<div id="Union, conditionals"><h2 id="Union, conditionals" class="header"><a href="#Union, conditionals">Union, conditionals</a></h2></div>
+<p>
+<code>UNION</code> combines results of two queries. there's no other way to make one result column to draw from different tables/columns.
+subqueries must return tables with same number of columns and compatible data types.
+<code>UNION</code> eliminates duplicates, <code>UNION ALL</code> concatenates and keeps duplicates.
+</p>
+
+<p>
+Condition expressions can be used for stuff like:
+</p>
+
+<pre SQL>
+SELECT CASE WHEN CAT = 'H' THEN 'Homework'
+            WHEN CAT = 'M' then 'Midterm'
+            WHEN CAT = 'F' THEN 'Final'
+            ELSE 'Unknown category' END,
+        ENO, POINTS
+FROM STUDENTS S, RESULTS R
+WHERE S.SID = R.SID
+AND S.FIRST = 'Ann' AND S.LAST = 'SMITH'
+</pre>
+
+<p>
+To replace a null value, you can do the following (same result):
+</p>
+<ul>
+<li>
+<code>CASE WHEN x IS NOT NULL THEN x ELSE y END</code>
+
+<li>
+<code>COALESCE (x, y)</code>
+
+</ul>
+
+    </div>
+</body>
+</html>
