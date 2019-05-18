@@ -1,9 +1,18 @@
 <html>
 <head>
-    <link rel="Stylesheet" type="text/css" href="style.css" />
-    <title>sql-overview</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
     <script type="text/javascript" async src="https://cdn.jsdelivr.net/gh/mathjax/MathJax@2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+    <link rel="Stylesheet" type="text/css" href="style.css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('pre.code').forEach(function(item) {
+          hljs.highlightBlock(item)
+        })
+      });
+    </script>
+    <title>sql-overview</title>
 </head>
 <body>
 <style type="text/css">
@@ -33,7 +42,7 @@ Basic query: <code>SELECT columns FROM table WHERE condition is true</code>
 The <code>FROM</code> clause is like declaring variables that range over tuples of a relation:
 </p>
 
-<pre SQL>
+<pre class="code">
 SELECT  E.ENO, E.TOPIC  -- choose columns ENO, TOPIC
 FROM    EXERCISES E     -- table exercises, E being an 'alias' for the current row
 WHERE   E.CAT = 'H'     -- where the column CAT contains the value 'H'
@@ -126,7 +135,7 @@ non-monotonic: 'there is no', 'does not exist', 'for all', 'min/max'. testing wh
 example to select students without any homework result:
 </p>
 
-<pre SQL>
+<pre class="code">
 SELECT  FIRST, LAST
 FROM    STUDENTS
 WHERE   SID NOT IN (SELECT  SID

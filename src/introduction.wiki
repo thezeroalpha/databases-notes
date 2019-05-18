@@ -62,7 +62,7 @@ Users usually don't have to think about efficiency, the DBMS will manage that.
 
 Creating a table with constraints:
 
-{{{
+{{{class="code"
 CREATE TABLE solved (
     id INT AUTO_INCREMENT,
     name VARCHAR(40) NOT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE solved (
 
 Creating a view:
 
-{{{
+{{{class="code"
 CREATE VIEW solved_homework AS
     SELECT id, name, homework FROM solved;
 }}}

@@ -1,9 +1,18 @@
 <html>
 <head>
-    <link rel="Stylesheet" type="text/css" href="style.css" />
-    <title>database-application-programming</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
     <script type="text/javascript" async src="https://cdn.jsdelivr.net/gh/mathjax/MathJax@2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css">
+    <link rel="Stylesheet" type="text/css" href="style.css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('pre.code').forEach(function(item) {
+          hljs.highlightBlock(item)
+        })
+      });
+    </script>
+    <title>database-application-programming</title>
 </head>
 <body>
 <style type="text/css">
@@ -145,8 +154,8 @@ Exploit SQL statement construction to run your own commands.
 Wrong:
 </p>
 
-<pre>
-stat.executeQuery("SELECT balance FROM accounts " + "WHERE name = '" + userName + "'" + " AND passwd = '" + userPassword + "'")
+<pre class="code java">
+stat.executeQuery("SELECT balance FROM accounts " + "WHERE name = '" + userName + "'" + " AND passwd = '" + userPassword + "'");
 </pre>
 
 <p>
@@ -157,11 +166,11 @@ So if you fill <code>'; SELECT * FROM accounts</code>, it will show all accounts
 Solution: don't use string concatenation, use prepared statements.
 </p>
 
-<pre>
+<pre class="code java">
 stat = conn.prepareStatement("SELECT balance FROM accounts " + "WHERE name = ? " + " AND passwd = ?");
-stat.setString(1, userName)
-stat.setString(2, userPassword)
-stat.executeQuery()
+stat.setString(1, userName);
+stat.setString(2, userPassword);
+stat.executeQuery();
 </pre>
 
 <div id="Database Application Programming-Dynamic-Impedance mismatch"><h4 id="Impedance mismatch" class="header"><a href="#Database Application Programming-Dynamic-Impedance mismatch">Impedance mismatch</a></h4></div>
@@ -353,7 +362,7 @@ not portable, only C# and VB
 so you can do like
 </p>
 
-<pre>
+<pre class="code">
 int[] my array = new int[] { 5, 3, 2, 6, 4, 2, 5 };
 var oddNumbers = from i in myarray where i \% 2 == 1 select i;
 </pre>

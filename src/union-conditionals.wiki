@@ -6,7 +6,7 @@ subqueries must return tables with same number of columns and compatible data ty
 
 Condition expressions can be used for stuff like:
 
-{{{SQL
+{{{class="code"
 SELECT CASE WHEN CAT = 'H' THEN 'Homework'
             WHEN CAT = 'M' then 'Midterm'
             WHEN CAT = 'F' THEN 'Final'

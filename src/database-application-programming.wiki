@@ -43,19 +43,19 @@ Exploit SQL statement construction to run your own commands.
 
 Wrong:
 
-{{{
-stat.executeQuery("SELECT balance FROM accounts " + "WHERE name = '" + userName + "'" + " AND passwd = '" + userPassword + "'")
+{{{class="code java"
+stat.executeQuery("SELECT balance FROM accounts " + "WHERE name = '" + userName + "'" + " AND passwd = '" + userPassword + "'");
 }}}
 
 So if you fill `'; SELECT * FROM accounts`, it will show all accounts. You can also then update, drop, and do anything you want.
 
 Solution: don't use string concatenation, use prepared statements.
 
-{{{
+{{{class="code java"
 stat = conn.prepareStatement("SELECT balance FROM accounts " + "WHERE name = ? " + " AND passwd = ?");
-stat.setString(1, userName)
-stat.setString(2, userPassword)
-stat.executeQuery()
+stat.setString(1, userName);
+stat.setString(2, userPassword);
+stat.executeQuery();
 }}}
 
 ==== Impedance mismatch ====
@@ -127,7 +127,7 @@ disadvantages:
 
 so you can do like
 
-{{{
+{{{class="code"
 int[] my array = new int[] { 5, 3, 2, 6, 4, 2, 5 };
 var oddNumbers = from i in myarray where i \% 2 == 1 select i;
 }}}

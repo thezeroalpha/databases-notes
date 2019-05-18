@@ -31,7 +31,7 @@ written as: s = { A₁ : D₁, ..., An : Dn }
 
 SQL notation:
 
-{{{
+{{{class="code"
 CREATE TABLE exercises
     (CAT    CHAR(1),
      ENO    NUMERIC(2),
@@ -112,7 +112,7 @@ choosing a primary key: single simple attribute, never updated
 ==== Foreign keys ====
 use key attributes to uniquely reference a tuple, like a pointer. denoted with arrows:
 
-{{{
+{{{class="code"
 RESULTS (SID → STUDENTS,
         (CAT, ENO) → EXERCISES,
         POINTS)
@@ -128,7 +128,7 @@ an existence guarantee is needed.
 
 foreign key constraints in SQL:
 
-{{{
+{{{class="code"
 CREATE TABLE RESULTS (
     ...
     FOREIGN KEY (SID) REFERENCES STUDENTS(SID)

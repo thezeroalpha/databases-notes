@@ -5,7 +5,7 @@ Basic query: `SELECT columns FROM table WHERE condition is true`
 
 The `FROM` clause is like declaring variables that range over tuples of a relation:
 
-{{{SQL
+{{{class="code"
 SELECT  E.ENO, E.TOPIC  -- choose columns ENO, TOPIC
 FROM    EXERCISES E     -- table exercises, E being an 'alias' for the current row
 WHERE   E.CAT = 'H'     -- where the column CAT contains the value 'H'
@@ -46,7 +46,7 @@ non-monotonic: 'there is no', 'does not exist', 'for all', 'min/max'. testing wh
 
 example to select students without any homework result:
 
-{{{SQL
+{{{class="code"
 SELECT  FIRST, LAST
 FROM    STUDENTS
 WHERE   SID NOT IN (SELECT  SID
